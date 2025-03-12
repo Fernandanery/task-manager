@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using TaskManager.Application.DTOs;
 using TaskManager.Application.Services;
 using TaskManager.Domain.Entities;
 
@@ -27,21 +29,24 @@ namespace TaskManager.WebApi.Controllers
         {
             var task = await _taskService.GetTaskById(id);
             if (task == null) return NotFound();
+
             return Ok(task);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TaskItem task)
+        public async Task<IActionResult> Create([FromBody] CreateTaskDto taskDto)
         {
+            var task = taskDto.Adapt<TaskItem>();
             var result = await _taskService.CreateTask(task);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] TaskItem task)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateTaskDto taskDto)
         {
-            var result = await _taskService.UpdateTask(id, task);
+            var result = await _taskService.UpdateTask(id, taskDto);
             if (result == null) return NotFound();
+
             return Ok(result);
         }
 

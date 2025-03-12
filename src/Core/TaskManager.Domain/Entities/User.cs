@@ -8,13 +8,8 @@ namespace TaskManager.Domain.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public required string Name { get; set; }
+        public required string Email { get; set; }
 
-        [Required]
-        public string Name { get; set; }
-
-        [Required]
-        public string Email { get; set; }
-
-        public List<TaskItem> Tasks { get; set; } = new();
     }
 }

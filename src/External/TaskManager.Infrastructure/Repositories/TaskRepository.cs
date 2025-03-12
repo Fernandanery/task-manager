@@ -16,26 +16,26 @@ namespace TaskManager.Infrastructure.Repositories
 
         public async Task<List<TaskItem>> GetAllTasksAsync()
         {
-            return await _context.Tasks.ToListAsync();
+            return await _context.Tasks
+                .Include(t => t.User)
+                .ToListAsync();
         }
 
         public async Task<TaskItem?> GetTaskByIdAsync(int id)
         {
-            return await _context.Tasks.FindAsync(id);
+            return await _context.Tasks
+                .Include(t => t.User)
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<TaskItem> CreateTaskAsync(TaskItem task)
         {
-            if (task.User != null)
+            if (task.UserId.HasValue)
             {
-                if (task.User.Id > 0)
+                var user = await _context.Users.FindAsync(task.UserId);
+                if (user != null)
                 {
-                    _context.Users.Attach(task.User);
-                }
-                else
-                {
-                    task.User.Id = 0;
-                    _context.Users.Add(task.User);
+                    task.UserId = user.Id;
                 }
             }
 
@@ -44,16 +44,23 @@ namespace TaskManager.Infrastructure.Repositories
             return task;
         }
 
-
-
-        public async Task<TaskItem?> UpdateTaskAsync(int id, TaskItem task)
+        public async Task<TaskItem?> UpdateTaskAsync(int id, TaskItem updatedTask)
         {
             var existingTask = await _context.Tasks.FindAsync(id);
             if (existingTask is null) return null;
 
-            existingTask.Title = task.Title;
-            existingTask.Description = task.Description;
-            existingTask.IsCompleted = task.IsCompleted;
+            existingTask.Title = updatedTask.Title;
+            existingTask.Description = updatedTask.Description;
+            existingTask.IsCompleted = updatedTask.IsCompleted;
+
+            if (updatedTask.UserId.HasValue)
+            {
+                var user = await _context.Users.FindAsync(updatedTask.UserId);
+                if (user != null)
+                {
+                    existingTask.UserId = user.Id;
+                }
+            }
 
             await _context.SaveChangesAsync();
             return existingTask;

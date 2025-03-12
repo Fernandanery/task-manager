@@ -17,7 +17,7 @@ namespace TaskManager.Infrastructure.Persistence
 
             modelBuilder.Entity<TaskItem>()
                 .HasOne(t => t.User)
-                .WithMany(u => u.Tasks)
+                .WithMany()
                 .HasForeignKey(t => t.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
