@@ -1,0 +1,57 @@
+# Diretório de cache do Visual Studio
+.vs/
+
+# Diretórios de build
+bin/
+obj/
+out/
+
+# Arquivos específicos do Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+# Arquivos de log
+*.log
+
+# Arquivos específicos de depuração
+*.pdb
+*.ilk
+
+# Configurações de usuário
+*.rsuser
+*.ruleset
+*.sln.ide
+
+# Arquivos temporários
+*.tmp
+*.cache
+
+# Diretórios de configuração do NuGet
+.nuget/
+packages/
+
+# Arquivos gerados pelo Entity Framework
+*.mdf
+*.ldf
+
+# Diretório de cache do .NET
+artifacts/
+project.lock.json
+project.fragment.lock.json
+
+# Arquivos específicos de configuração do Visual Studio Code
+.vscode/
+launch.json
+tasks.json
+
+# Certificados e chaves de desenvolvimento
+*.pfx
+*.key
+
+# Arquivos para Docker (se estiver usando)
+**/Dockerfile
+**/docker-compose*
