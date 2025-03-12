@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\TaskManager.Domain\TaskManager.Domain.csproj" />
-    <ProjectReference Include="..\..\Core\TaskManager.Application\TaskManager.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,20 @@
-﻿namespace TaskManager.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TaskManager.Domain.Entities
 {
     public class User
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+
+        public List<TaskItem> Tasks { get; set; } = new();
     }
 }

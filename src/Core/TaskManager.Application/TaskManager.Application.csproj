@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TaskManager.Domain\TaskManager.Domain.csproj" />
     <ProjectReference Include="..\TaskManager.SharedKernel\TaskManager.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\External\TaskManager.Infrastructure\TaskManager.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
