@@ -1,0 +1,12 @@
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\bin\Debug\net9.0\TaskManager.SharedKernel.deps.json
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\bin\Debug\net9.0\TaskManager.SharedKernel.dll
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\bin\Debug\net9.0\TaskManager.SharedKernel.pdb
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\TaskManager.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\TaskManager.SharedKernel.AssemblyInfoInputs.cache
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\TaskManager.SharedKernel.AssemblyInfo.cs
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\TaskManager.SharedKernel.csproj.CoreCompileInputs.cache
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\TaskManager.SharedKernel.sourcelink.json
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\TaskManager.SharedKernel.dll
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\refint\TaskManager.SharedKernel.dll
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\TaskManager.SharedKernel.pdb
+C:\Projetos\estudos\task-manager\src\Core\TaskManager.SharedKernel\obj\Debug\net9.0\ref\TaskManager.SharedKernel.dll
