@@ -4,7 +4,7 @@ Este projeto foi desenvolvido para fins de estudo e explora o uso de **autentica
 
 ---
 
-## Tecnologias Utilizadas
+## Tecnologias
 - **.NET 9** – Desenvolvimento da API.  
 - **Entity Framework Core** – ORM para manipulação de dados.  
 - **JWT (JSON Web Tokens)** – Para autenticação e autorização.  
