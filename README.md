@@ -1,4 +1,4 @@
-# TaskManager - Gerenciador de Tarefas com .NET 9
+# TaskManager - Gerenciador de Tarefas
 
 Este projeto foi desenvolvido para fins de estudo e explora o uso de **autenticação JWT** e **gerenciamento de tarefas** utilizando **.NET 9** e ferramentas modernas para garantir desempenho e segurança.
 
