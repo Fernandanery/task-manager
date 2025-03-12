@@ -16,7 +16,7 @@ Este projeto foi desenvolvido para fins de estudo e explora o uso de **autentica
 
 ---
 
-## 🎯 Objetivo do Projeto
+## Objetivo do Projeto
 - Criar um sistema de gerenciamento de tarefas onde os usuários possam criar, editar, excluir e organizar tarefas.  
 - Implementar autenticação e autorização com **JWT** para controle de acesso.  
 - Utilizar **Hangfire** para executar tarefas em segundo plano (exemplo: lembretes).  
@@ -25,7 +25,7 @@ Este projeto foi desenvolvido para fins de estudo e explora o uso de **autentica
 
 ---
 
-## ✅ Funcionalidades
+## Funcionalidades
 -  Criação, edição e exclusão de tarefas.  
 -  Criação de subtarefas vinculadas.  
 -  Atribuição de status e etiquetas personalizadas às tarefas.  
