@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.DTOs;
 using TaskManager.Application.Services;
 using TaskManager.Domain.Entities;
@@ -10,10 +11,12 @@ namespace TaskManager.WebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly IMapper _mapper;
 
-        public UserController(UserService userService)
+        public UserController(UserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -33,10 +36,11 @@ namespace TaskManager.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] User user)
+        public async Task<IActionResult> Create([FromBody] UpdateUserDto userDto)
         {
-            var createdUser = await _userService.CreateUserAsync(user);
-            return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, createdUser);
+            var user = _mapper.Map<User>(userDto);
+            var result = await _userService.CreateUserAsync(user);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
         [HttpPut("{id}")]
@@ -48,7 +52,6 @@ namespace TaskManager.WebApi.Controllers
 
             return Ok(user);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

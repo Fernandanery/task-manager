@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.DTOs;
 using TaskManager.Application.Services;
@@ -11,10 +12,13 @@ namespace TaskManager.WebApi.Controllers
     public class TaskController : ControllerBase
     {
         private readonly TaskService _taskService;
+        private readonly IMapper _mapper;
 
-        public TaskController(TaskService taskService)
+        public TaskController(TaskService taskService, IMapper mapper)
         {
             _taskService = taskService;
+            _mapper = mapper;
+
         }
 
         [HttpGet]
@@ -34,9 +38,9 @@ namespace TaskManager.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateTaskDto taskDto)
+        public async Task<IActionResult> Create([FromBody] UpdateTaskDto taskDto)
         {
-            var task = taskDto.Adapt<TaskItem>();
+            var task = _mapper.Map<TaskItem>(taskDto);
             var result = await _taskService.CreateTask(task);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
