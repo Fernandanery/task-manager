@@ -6,13 +6,19 @@ Este projeto foi desenvolvido para fins de estudo e explora o uso de **autentica
 
 ## Tecnologias
 - **.NET 9** – Desenvolvimento da API.  
-- **Entity Framework Core** – ORM para manipulação de dados.  
-- **JWT (JSON Web Tokens)** – Para autenticação e autorização.  
-- **Serilog** – Para logging estruturado e rastreamento de atividades.  
-- **Mapster** – Para mapeamento eficiente de objetos.  
+- **Entity Framework Core** – ORM para manipulação de dados.
+- **SQL Server** (LocalDB) -  Banco para persistência de dados
+- **Dependency Injection** - Injeção de dependência para serviços e repositórios
+- **Swagger e Scalar** - Documentação da API	
 - **FluentValidation** – Para validação de dados de entrada.  
+- **Mapster** – Para mapeamento eficiente de objetos.  
+- **JWT (JSON Web Tokens)** – Para autenticação e autorização.
+- **ProblemDetails** - Padrão de resposta para erros HTTP	
+- **Serilog** – Para logging estruturado e rastreamento de atividades.  
 - **Hangfire** – Para gerenciamento de tarefas em segundo plano.  
-- **API Versioning** – Para versionamento de endpoints.  
+- **API Versioning** – Para versionamento de endpoints.
+- **Cancellation Token** - Para cancelar requisições assíncronas de maneira controlada
+- **X-unit** - Para testes unitários
 
 ---
 
