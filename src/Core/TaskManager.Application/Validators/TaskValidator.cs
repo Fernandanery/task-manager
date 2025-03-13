@@ -1,21 +1,23 @@
 ﻿using FluentValidation;
-using TaskManager.Application.DTOs;
+using TaskManager.SharedKernel.Constants;
 
 namespace TaskManager.Application.Validators
 {
-    public class TaskValidator : AbstractValidator<UpdateTaskDto>
+    public class TaskValidator : AbstractValidator<CreateTaskDto>
     {
         public TaskValidator()
         {
             RuleFor(x => x.Title)
-                .NotEmpty().WithMessage("O título é obrigatório.")
-                .MaximumLength(200).WithMessage("O título deve ter no máximo 200 caracteres.");
+                .NotEmpty().WithMessage(ValidationMessages.TitleRequired)
+                .MaximumLength(100).WithMessage(ValidationMessages.TitleTooLong);
 
             RuleFor(x => x.Description)
-                .NotEmpty().WithMessage("A descrição é obrigatória.");
+                .NotEmpty().WithMessage(ValidationMessages.DescriptionRequired)
+                .MaximumLength(500).WithMessage(ValidationMessages.DescriptionTooLong);
 
-            RuleFor(x => x.IsCompleted)
-                .NotNull().WithMessage("O status da tarefa é obrigatório.");
+            RuleFor(x => x.CreatedAt)
+                .NotEmpty().WithMessage(ValidationMessages.CreatedAtRequired)
+                .LessThanOrEqualTo(DateTime.UtcNow).WithMessage(ValidationMessages.InvalidCreatedAt);
         }
     }
 }

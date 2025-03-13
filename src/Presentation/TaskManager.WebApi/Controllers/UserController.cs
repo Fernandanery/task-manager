@@ -36,7 +36,7 @@ namespace TaskManager.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UpdateUserDto userDto)
+        public async Task<IActionResult> Create([FromBody] CreateUserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
             var result = await _userService.CreateUserAsync(user);

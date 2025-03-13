@@ -8,7 +8,7 @@ namespace TaskManager.Application.Mapping
     {
         public static void RegisterMappings()
         {
-            TypeAdapterConfig<UpdateUserDto, User>
+            TypeAdapterConfig<CreateUserDto, User>
                 .NewConfig()
                 .IgnoreNullValues(true);
         }

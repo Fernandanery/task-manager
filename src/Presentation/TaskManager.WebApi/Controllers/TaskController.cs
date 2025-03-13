@@ -38,7 +38,7 @@ namespace TaskManager.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UpdateTaskDto taskDto)
+        public async Task<IActionResult> Create([FromBody] CreateTaskDto taskDto)
         {
             var task = _mapper.Map<TaskItem>(taskDto);
             var result = await _taskService.CreateTask(task);
