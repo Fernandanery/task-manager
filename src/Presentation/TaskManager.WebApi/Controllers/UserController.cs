@@ -19,6 +19,8 @@ namespace TaskManager.WebApi.Controllers
             _mapper = mapper;
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -26,6 +28,9 @@ namespace TaskManager.WebApi.Controllers
             return Ok(users);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -35,24 +40,34 @@ namespace TaskManager.WebApi.Controllers
             return Ok(user);
         }
 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
             var result = await _userService.CreateUserAsync(user);
+
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateUserDto updatedUser)
         {
             var user = await _userService.UpdateUserAsync(id, updatedUser);
-            if (user == null)
-                return NotFound();
+            if (user == null) return NotFound();
 
             return Ok(user);
         }
 
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
