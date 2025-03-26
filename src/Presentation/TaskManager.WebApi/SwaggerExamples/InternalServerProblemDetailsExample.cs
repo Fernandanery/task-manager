@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Swashbuckle.AspNetCore.Filters;
+using TaskManager.SharedKernel.Constants;
 
 namespace TaskManager.WebApi.SwaggerExamples;
 
-public class InternalServerProblemDetailsExample : IExamplesProvider<ProblemDetails>
+public class InternalServerProblemDetailsExample
 {
     public ProblemDetails GetExamples()
     {
-        return new ProblemDetails
+        return new ValidationProblemDetails
         {
             Status = StatusCodes.Status500InternalServerError,
             Title = ReasonPhrases.GetReasonPhrase(StatusCodes.Status500InternalServerError),
-            Detail = "Erro inesperado no servidor.",
+            Detail = Miscellaneous.StatusCode500,
             Type = "https://meuapp.com/docs/errors/internal-server-error"
         };
     }
