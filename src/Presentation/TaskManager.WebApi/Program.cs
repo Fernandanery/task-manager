@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-using Hellang.Middleware.ProblemDetails;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
@@ -12,19 +11,16 @@ using TaskManager.Application.Validators;
 using TaskManager.Domain.Interfaces;
 using TaskManager.Infrastructure.Persistence;
 using TaskManager.Infrastructure.Repositories;
-using TaskManager.WebApi.Configuration;
 using TaskManager.WebApi.SwaggerExamples;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configura ProblemDetails
-ProblemDetailsConfig.ConfigureProblemDetails(builder.Services);
 
 // Config mapeamento (Mapster)
 MappingConfig.RegisterMappings();
 
-// Config Entity Framework e SQL Server
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+// Reutilizando instancias de DbContext
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Config injeção de dependência para repositórios e serviços
@@ -67,11 +63,11 @@ builder.Services.AddSwaggerGen(c =>
 
 // Carrega exemplos de erro no Swagger
 builder.Services.AddSwaggerExamplesFromAssemblyOf<BadRequestProblemDetailsExample>();
+builder.Services.AddSwaggerExamplesFromAssemblyOf<NotFoundProblemDetailsExample>();
+builder.Services.AddSwaggerExamplesFromAssemblyOf<InternalServerProblemDetailsExample>();
 
 var app = builder.Build();
 
-// Usa ProblemDetails Middleware
-app.UseProblemDetails();
 
 // Adiciona TraceId automaticamente no Response
 app.Use(async (context, next) =>
