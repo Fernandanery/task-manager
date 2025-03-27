@@ -3,10 +3,14 @@ using FluentValidation.AspNetCore;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Text;
+using TaskManager.Application.Auth;
 using TaskManager.Application.Mapping;
 using TaskManager.Application.Services;
+using TaskManager.Application.Services.Auth;
 using TaskManager.Application.Validators;
 using TaskManager.Domain.Interfaces;
 using TaskManager.Infrastructure.Persistence;
@@ -57,6 +61,32 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API para gerenciamento de tarefas"
     });
 
+    // Adiciona suporte ao JWT Bearer
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Digite **Bearer** e em seguida o token JWT.\n\nExemplo: `Bearer eyJhbGciOi...`"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    //Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+
     //  Adiciona os exemplos personalizados
     c.ExampleFilters();
 });
@@ -65,6 +95,25 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddSwaggerExamplesFromAssemblyOf<BadRequestProblemDetailsExample>();
 builder.Services.AddSwaggerExamplesFromAssemblyOf<NotFoundProblemDetailsExample>();
 builder.Services.AddSwaggerExamplesFromAssemblyOf<InternalServerProblemDetailsExample>();
+
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+//Config JWT
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!))
+        };
+    });
+
 
 var app = builder.Build();
 
@@ -100,6 +149,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

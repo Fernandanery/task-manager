@@ -49,5 +49,10 @@ namespace TaskManager.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
     }
 }

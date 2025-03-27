@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.DTOs;
 using TaskManager.Application.Services;
@@ -19,6 +20,7 @@ namespace TaskManager.WebApi.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -26,6 +28,7 @@ namespace TaskManager.WebApi.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -44,6 +47,7 @@ namespace TaskManager.WebApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateUserDto updatedUser)
         {
@@ -53,6 +57,7 @@ namespace TaskManager.WebApi.Controllers
             return Ok(user);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

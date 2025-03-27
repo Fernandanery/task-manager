@@ -9,5 +9,6 @@ namespace TaskManager.Domain.Interfaces
         Task<User> AddAsync(User user);
         Task<User?> UpdateAsync(User user);
         Task<bool> DeleteAsync(int id);
+        Task<User?> GetUserByEmailAsync(string email);
     }
 }
