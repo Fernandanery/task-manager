@@ -9,13 +9,13 @@ namespace TaskManager.Application.Validators
         public UserValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage(ValidationMessages.NameRequired)
-                .MinimumLength(3).WithMessage(ValidationMessages.NameTooShort)
-                .MaximumLength(50).WithMessage(ValidationMessages.NameTooLong);
+                .NotEmpty().WithMessage(Miscellaneous.NameRequired)
+                .MinimumLength(3).WithMessage(Miscellaneous.NameTooShort)
+                .MaximumLength(50).WithMessage(Miscellaneous.NameTooLong);
 
             RuleFor(x => x.Email)
-                .NotEmpty().WithMessage(ValidationMessages.EmailRequired)
-                .EmailAddress().WithMessage(ValidationMessages.InvalidEmail);
+                .NotEmpty().WithMessage(Miscellaneous.EmailRequired)
+                .EmailAddress().WithMessage(Miscellaneous.InvalidEmail);
         }
     }
 }

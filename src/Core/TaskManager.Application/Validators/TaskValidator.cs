@@ -8,16 +8,16 @@ namespace TaskManager.Application.Validators
         public TaskValidator()
         {
             RuleFor(x => x.Title)
-                .NotEmpty().WithMessage(ValidationMessages.TitleRequired)
-                .MaximumLength(100).WithMessage(ValidationMessages.TitleTooLong);
+                .NotEmpty().WithMessage(Miscellaneous.TitleRequired)
+                .MaximumLength(100).WithMessage(Miscellaneous.TitleTooLong);
 
             RuleFor(x => x.Description)
-                .NotEmpty().WithMessage(ValidationMessages.DescriptionRequired)
-                .MaximumLength(500).WithMessage(ValidationMessages.DescriptionTooLong);
+                .NotEmpty().WithMessage(Miscellaneous.DescriptionRequired)
+                .MaximumLength(500).WithMessage(Miscellaneous.DescriptionTooLong);
 
             RuleFor(x => x.CreatedAt)
-                .NotEmpty().WithMessage(ValidationMessages.CreatedAtRequired)
-                .LessThanOrEqualTo(DateTime.UtcNow).WithMessage(ValidationMessages.InvalidCreatedAt);
+                .NotEmpty().WithMessage(Miscellaneous.CreatedAtRequired)
+                .LessThanOrEqualTo(DateTime.UtcNow).WithMessage(Miscellaneous.InvalidCreatedAt);
         }
     }
 }

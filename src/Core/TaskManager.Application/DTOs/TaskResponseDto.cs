@@ -1,11 +1,4 @@
-﻿public class TaskResponseDto
+﻿namespace TaskManager.Application.DTOs
 {
-    public int Id { get; set; }
-    public required string Title { get; set; }
-    public required string Description { get; set; }
-    public bool IsCompleted { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public int? UserId { get; set; }
-    public string? UserName { get; set; }
-    public string? UserEmail { get; set; }
+    public record TaskResponseDto(int Id, string Title, string Description, bool IsCompleted, DateTime CreatedAt, int? UserId, string? UserName, string? UserEmail);
 }

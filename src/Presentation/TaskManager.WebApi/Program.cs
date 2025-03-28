@@ -5,6 +5,7 @@ using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using TaskManager.Application.Auth;
@@ -19,31 +20,40 @@ using TaskManager.WebApi.SwaggerExamples;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configurando o Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Config mapeamento (Mapster)
 MappingConfig.RegisterMappings();
 
-// Reutilizando instancias de DbContext
+// Reutilizando instâncias de DbContext
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Config injeção de dependência para repositórios e serviços
+// Injeção de dependência
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<TaskService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserService>();
 
-// Config FluentValidation
+// JWT Token Service
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+// FluentValidation
 builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<TaskValidator>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 
-// Config Mapster
+// Mapster
 builder.Services.AddMapster();
 builder.Services.AddSingleton<IMapper, Mapper>();
 
-// Config Controllers
+// Controllers
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -51,54 +61,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
-// Configuração do Swagger com exemplos
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Task Manager API",
-        Version = "v1",
-        Description = "API para gerenciamento de tarefas"
-    });
-
-    // Adiciona suporte ao JWT Bearer
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Digite **Bearer** e em seguida o token JWT.\n\nExemplo: `Bearer eyJhbGciOi...`"
-    });
-
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    //Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
-
-    //  Adiciona os exemplos personalizados
-    c.ExampleFilters();
-});
-
-// Carrega exemplos de erro no Swagger
-builder.Services.AddSwaggerExamplesFromAssemblyOf<BadRequestProblemDetailsExample>();
-builder.Services.AddSwaggerExamplesFromAssemblyOf<NotFoundProblemDetailsExample>();
-builder.Services.AddSwaggerExamplesFromAssemblyOf<InternalServerProblemDetailsExample>();
-
-builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
-
-//Config JWT
+// Autenticação JWT
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -114,11 +77,57 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
+// Swagger + JWT + Examples
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Task Manager API",
+        Version = "v1",
+        Description = "API para gerenciamento de tarefas"
+    });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description =
+                    "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            },
+            new List<string>()
+        }
+    });
+
+    c.ExampleFilters();
+});
+
+builder.Services.AddSwaggerExamplesFromAssemblyOf<BadRequestProblemDetailsExample>();
+builder.Services.AddSwaggerExamplesFromAssemblyOf<NotFoundProblemDetailsExample>();
+builder.Services.AddSwaggerExamplesFromAssemblyOf<InternalServerProblemDetailsExample>();
 
 var app = builder.Build();
 
+// Middleware de tratamento de exceções
+app.UseMiddleware<ExceptionMiddleware>();
 
-// Adiciona TraceId automaticamente no Response
+// Middleware TraceId
 app.Use(async (context, next) =>
 {
     context.Response.OnStarting(() =>
@@ -135,7 +144,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    // Redireciona para o Swagger automaticamente
     app.Use(async (context, next) =>
     {
         if (context.Request.Path == "/")
@@ -151,7 +159,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
