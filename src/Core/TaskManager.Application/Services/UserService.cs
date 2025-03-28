@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using Microsoft.AspNetCore.Identity;
 using TaskManager.Application.DTOs;
 using TaskManager.Domain.Entities;
 using TaskManager.Domain.Interfaces;
@@ -9,12 +10,15 @@ namespace TaskManager.Application.Services
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
 
-        public UserService(IUserRepository repository, IMapper mapper)
+
+        public UserService(IUserRepository repository, IMapper mapper, IPasswordHasher<User> passwordHasher)
         {
             _repository = repository;
             _mapper = mapper;
+            _passwordHasher = passwordHasher;
 
         }
 
@@ -30,6 +34,7 @@ namespace TaskManager.Application.Services
 
         public async Task<User> CreateUserAsync(User user)
         {
+            user.Password = _passwordHasher.HashPassword(user, user.Password);
             return await _repository.AddAsync(user);
         }
 

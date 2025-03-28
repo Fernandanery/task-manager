@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using Mapster;
 using MapsterMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -13,6 +14,7 @@ using TaskManager.Application.Mapping;
 using TaskManager.Application.Services;
 using TaskManager.Application.Services.Auth;
 using TaskManager.Application.Validators;
+using TaskManager.Domain.Entities;
 using TaskManager.Domain.Interfaces;
 using TaskManager.Infrastructure.Persistence;
 using TaskManager.Infrastructure.Repositories;
@@ -121,6 +123,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddSwaggerExamplesFromAssemblyOf<BadRequestProblemDetailsExample>();
 builder.Services.AddSwaggerExamplesFromAssemblyOf<NotFoundProblemDetailsExample>();
 builder.Services.AddSwaggerExamplesFromAssemblyOf<InternalServerProblemDetailsExample>();
+
+// Hash de senha
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();
 

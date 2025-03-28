@@ -51,5 +51,10 @@
 
         public const string CreatedAtRequired = "A data de criação é obrigatória.";
         public const string InvalidCreatedAt = "A data de criação não pode ser futura.";
+
+        // Login
+        public const string InvalidCredentials = "Credenciais inválidas.";
+
+
     }
 }
