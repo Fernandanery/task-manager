@@ -75,5 +75,12 @@ namespace TaskManager.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<List<TaskItem>> GetPendingTasksAsync()
+        {
+            return await _context.Tasks
+                .Where(t => t.IsCompleted == false)
+                .ToListAsync();
+        }
     }
 }

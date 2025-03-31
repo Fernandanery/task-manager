@@ -59,5 +59,11 @@ namespace TaskManager.Application.Services
         {
             return await _repository.DeleteTaskAsync(id);
         }
+
+        public async Task<List<TaskItem>> GetPendingTasksAsync()
+        {
+            return await _repository.GetPendingTasksAsync();
+        }
+
     }
 }

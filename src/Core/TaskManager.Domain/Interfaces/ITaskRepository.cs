@@ -9,5 +9,6 @@ namespace TaskManager.Domain.Interfaces
         Task<TaskItem> CreateTaskAsync(TaskItem task);
         Task<TaskItem?> UpdateTaskAsync(int id, TaskItem task);
         Task<bool> DeleteTaskAsync(int id);
+        Task<List<TaskItem>> GetPendingTasksAsync();
     }
 }

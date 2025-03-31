@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using Hangfire;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
@@ -21,6 +22,15 @@ using TaskManager.Infrastructure.Repositories;
 using TaskManager.WebApi.SwaggerExamples;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Config hangfire
+builder.Services.AddHangfire(config =>
+    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+          .UseSimpleAssemblyNameTypeSerializer()
+          .UseRecommendedSerializerSettings()
+          .UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddHangfireServer();
 
 // Configurando o Serilog
 Log.Logger = new LoggerConfiguration()
@@ -129,6 +139,9 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();
 
+// Hangfire
+app.UseHangfireDashboard();
+
 // Middleware de tratamento de exceções
 app.UseMiddleware<ExceptionMiddleware>();
 
@@ -160,6 +173,10 @@ if (app.Environment.IsDevelopment())
         await next();
     });
 }
+
+RecurringJob.AddOrUpdate("tarefa-recorrente",
+    () => Console.WriteLine($"Executando tarefa às {DateTime.Now}"), Cron.Minutely);
+
 
 app.UseHttpsRedirection();
 

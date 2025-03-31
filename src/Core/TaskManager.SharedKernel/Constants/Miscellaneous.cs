@@ -54,7 +54,5 @@
 
         // Login
         public const string InvalidCredentials = "Credenciais inválidas.";
-
-
     }
 }
