@@ -14,21 +14,21 @@ namespace TaskManager.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<TaskItem>> GetAllTasksAsync()
+        public async Task<List<TaskItem>> GetAllTasksAsync(CancellationToken cancellationToken)
         {
             return await _context.Tasks
                 .Include(t => t.User)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task<TaskItem?> GetTaskByIdAsync(int id)
+        public async Task<TaskItem?> GetTaskByIdAsync(int id, CancellationToken cancellationToken)
         {
             return await _context.Tasks
                 .Include(t => t.User)
-                .FirstOrDefaultAsync(t => t.Id == id);
+                .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
         }
 
-        public async Task<TaskItem> CreateTaskAsync(TaskItem task)
+        public async Task<TaskItem> CreateTaskAsync(TaskItem task, CancellationToken cancellationToken)
         {
             if (task.UserId.HasValue)
             {
@@ -44,7 +44,7 @@ namespace TaskManager.Infrastructure.Repositories
             return task;
         }
 
-        public async Task<TaskItem?> UpdateTaskAsync(int id, TaskItem updatedTask)
+        public async Task<TaskItem?> UpdateTaskAsync(int id, TaskItem updatedTask, CancellationToken cancellationToken)
         {
             var existingTask = await _context.Tasks.FindAsync(id);
             if (existingTask is null) return null;
@@ -66,7 +66,7 @@ namespace TaskManager.Infrastructure.Repositories
             return existingTask;
         }
 
-        public async Task<bool> DeleteTaskAsync(int id)
+        public async Task<bool> DeleteTaskAsync(int id, CancellationToken cancellationToken)
         {
             var task = await _context.Tasks.FindAsync(id);
             if (task is null) return false;

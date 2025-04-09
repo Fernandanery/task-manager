@@ -25,21 +25,21 @@ namespace TaskManager.WebApi.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             _logger.LogInformation(Miscellaneous.GetAllUsers);
 
-            var users = await _userService.GetAllUsersAsync();
+            var users = await _userService.GetAllUsersAsync(cancellationToken);
             return Ok(users);
         }
 
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken)
         {
-            _logger.LogInformation(Miscellaneous.GetUserById, id);
+            _logger.LogInformation(Miscellaneous.GetUserById, id, cancellationToken);
 
-            var user = await _userService.GetUserByIdAsync(id);
+            var user = await _userService.GetUserByIdAsync(id, cancellationToken);
             if (user == null)
             {
                 _logger.LogWarning(Miscellaneous.UserByIdNotFound, id);
@@ -50,12 +50,12 @@ namespace TaskManager.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateUserDto userDto)
+        public async Task<IActionResult> Create([FromBody] CreateUserDto userDto, CancellationToken cancellationToken)
         {
-            _logger.LogInformation(Miscellaneous.CreateUserRequest, userDto);
+            _logger.LogInformation(Miscellaneous.CreateUserRequest, userDto, cancellationToken);
 
             var user = _mapper.Map<User>(userDto);
-            var result = await _userService.CreateUserAsync(user);
+            var result = await _userService.CreateUserAsync(user, cancellationToken);
 
             _logger.LogInformation(Miscellaneous.UserCreatedSuccessfully, result.Id);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
@@ -63,11 +63,11 @@ namespace TaskManager.WebApi.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateUserDto updatedUser)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateUserDto updatedUser, CancellationToken cancellationToken)
         {
-            _logger.LogInformation(Miscellaneous.UpdateUserRequest, id, updatedUser);
+            _logger.LogInformation(Miscellaneous.UpdateUserRequest, id, updatedUser, cancellationToken);
 
-            var user = await _userService.UpdateUserAsync(id, updatedUser);
+            var user = await _userService.UpdateUserAsync(id, updatedUser, cancellationToken);
             if (user == null)
             {
                 _logger.LogWarning(Miscellaneous.UserUpdateNotFound, id);
@@ -80,11 +80,11 @@ namespace TaskManager.WebApi.Controllers
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
-            _logger.LogInformation(Miscellaneous.DeleteUserRequest, id);
+            _logger.LogInformation(Miscellaneous.DeleteUserRequest, id, cancellationToken);
 
-            var deleted = await _userService.DeleteUserAsync(id);
+            var deleted = await _userService.DeleteUserAsync(id, cancellationToken);
             if (!deleted)
             {
                 _logger.LogWarning(Miscellaneous.UserDeleteNotFound, id);

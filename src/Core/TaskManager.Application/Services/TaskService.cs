@@ -8,30 +8,34 @@ namespace TaskManager.Application.Services
     public class TaskService : ITaskService
     {
         private readonly ITaskRepository _repository;
+        private readonly IUserRepository _userRepository;
 
-        public TaskService(ITaskRepository repository)
+        public TaskService(ITaskRepository repository, IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
         }
 
-        public async Task<List<TaskItem>> GetAllTasks()
+        public async Task<List<TaskItem>> GetAllTasks(CancellationToken cancellationToken)
         {
-            return await _repository.GetAllTasksAsync();
+            //await Task.Delay(5000, cancellationToken); // Simula um tempo de processamento de 5 segundos
+
+            return await _repository.GetAllTasksAsync(cancellationToken);
         }
 
-        public async Task<TaskItem?> GetTaskById(int id)
+        public async Task<TaskItem?> GetTaskById(int id, CancellationToken cancellationToken)
         {
-            return await _repository.GetTaskByIdAsync(id);
+            return await _repository.GetTaskByIdAsync(id, cancellationToken);
         }
 
-        public async Task<TaskItem> CreateTask(TaskItem task)
+        public async Task<TaskItem> CreateTask(TaskItem task, CancellationToken cancellationToken)
         {
-            return await _repository.CreateTaskAsync(task);
+            return await _repository.CreateTaskAsync(task, cancellationToken);
         }
 
-        public async Task<TaskItem?> UpdateTask(int id, UpdateTaskDto taskDto)
+        public async Task<TaskItem?> UpdateTask(int id, UpdateTaskDto taskDto, CancellationToken cancellationToken)
         {
-            var existingTask = await _repository.GetTaskByIdAsync(id);
+            var existingTask = await _repository.GetTaskByIdAsync(id, cancellationToken);
             if (existingTask is null) return null;
 
             if (!string.IsNullOrEmpty(taskDto.Title))
@@ -45,25 +49,25 @@ namespace TaskManager.Application.Services
 
             if (taskDto.UserId.HasValue)
             {
-                var user = await _repository.GetTaskByIdAsync(taskDto.UserId.Value);
+                var user = await _userRepository.GetUserByIdAsync(taskDto.UserId.Value, cancellationToken);
                 if (user != null)
                 {
                     existingTask.UserId = user.Id;
                 }
             }
 
-            await _repository.UpdateTaskAsync(id, existingTask);
+            await _repository.UpdateTaskAsync(id, existingTask, cancellationToken);
             return existingTask;
         }
-        public async Task<bool> DeleteTask(int id)
+
+        public async Task<bool> DeleteTask(int id, CancellationToken cancellationToken)
         {
-            return await _repository.DeleteTaskAsync(id);
+            return await _repository.DeleteTaskAsync(id, cancellationToken);
         }
 
         public async Task<List<TaskItem>> GetPendingTasksAsync()
         {
             return await _repository.GetPendingTasksAsync();
         }
-
     }
 }

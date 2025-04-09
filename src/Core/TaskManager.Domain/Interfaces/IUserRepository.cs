@@ -4,11 +4,11 @@ namespace TaskManager.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllAsync();
-        Task<User?> GetByIdAsync(int id);
-        Task<User> AddAsync(User user);
-        Task<User?> UpdateAsync(User user);
-        Task<bool> DeleteAsync(int id);
-        Task<User?> GetUserByEmailAsync(string email);
+        Task<List<User>> GetAllAsync(CancellationToken cancellationToken);
+        Task<User?> GetUserByIdAsync(int id, CancellationToken cancellationToken);
+        Task<User> AddUserAsync(User user, CancellationToken cancellationToken);
+        Task<User?> UpdateAsync(User user, CancellationToken cancellationToken);
+        Task<bool> DeleteAsync(int id, CancellationToken cancellationToken);
+        Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken);
     }
 }

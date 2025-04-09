@@ -22,36 +22,36 @@ namespace TaskManager.Application.Services
 
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public async Task<List<User>> GetAllUsersAsync(CancellationToken cancellationToken)
         {
-            return await _repository.GetAllAsync();
+            return await _repository.GetAllAsync(cancellationToken);
         }
 
-        public async Task<User?> GetUserByIdAsync(int id)
+        public async Task<User?> GetUserByIdAsync(int id, CancellationToken cancellationToken)
         {
-            return await _repository.GetByIdAsync(id);
+            return await _repository.GetUserByIdAsync(id, cancellationToken);
         }
 
-        public async Task<User> CreateUserAsync(User user)
+        public async Task<User> CreateUserAsync(User user, CancellationToken cancellationToken)
         {
             user.Password = _passwordHasher.HashPassword(user, user.Password);
-            return await _repository.AddAsync(user);
+            return await _repository.AddUserAsync(user, cancellationToken);
         }
 
-        public async Task<User?> UpdateUserAsync(int id, UpdateUserDto updatedUser)
+        public async Task<User?> UpdateUserAsync(int id, UpdateUserDto updatedUser, CancellationToken cancellationToken)
         {
-            var user = await _repository.GetByIdAsync(id);
+            var user = await _repository.GetUserByIdAsync(id, cancellationToken);
             if (user == null) return null;
 
             _mapper.Map(updatedUser, user);
 
-            await _repository.UpdateAsync(user);
+            await _repository.AddUserAsync(user, cancellationToken);
             return user;
         }
 
-        public async Task<bool> DeleteUserAsync(int id)
+        public async Task<bool> DeleteUserAsync(int id, CancellationToken cancellationToken)
         {
-            return await _repository.DeleteAsync(id);
+            return await _repository.DeleteAsync(id, cancellationToken);
         }
     }
 }

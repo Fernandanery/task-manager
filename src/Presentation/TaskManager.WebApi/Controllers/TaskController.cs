@@ -25,21 +25,21 @@ namespace TaskManager.WebApi.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             _logger.LogInformation(Miscellaneous.GetAllTasks);
 
-            var tasks = await _taskService.GetAllTasks();
+            var tasks = await _taskService.GetAllTasks(cancellationToken);
             return Ok(tasks);
         }
 
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken)
         {
             _logger.LogInformation(Miscellaneous.GetTaskById, id);
 
-            var task = await _taskService.GetTaskById(id);
+            var task = await _taskService.GetTaskById(id, cancellationToken);
 
             if (task == null)
             {
@@ -52,12 +52,12 @@ namespace TaskManager.WebApi.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateTaskDto taskDto)
+        public async Task<IActionResult> Create([FromBody] CreateTaskDto taskDto, CancellationToken cancellationToken)
         {
             _logger.LogInformation(Miscellaneous.CreateTaskRequest, taskDto);
 
             var task = _mapper.Map<TaskItem>(taskDto);
-            var result = await _taskService.CreateTask(task);
+            var result = await _taskService.CreateTask(task, cancellationToken);
 
             _logger.LogInformation(Miscellaneous.TaskCreatedSuccessfully, result.Id);
 
@@ -66,11 +66,11 @@ namespace TaskManager.WebApi.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateTaskDto taskDto)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateTaskDto taskDto, CancellationToken cancellationToken)
         {
             _logger.LogInformation(Miscellaneous.UpdateTaskRequest, id, taskDto);
 
-            var result = await _taskService.UpdateTask(id, taskDto);
+            var result = await _taskService.UpdateTask(id, taskDto, cancellationToken);
             if (result == null)
             {
                 _logger.LogWarning(Miscellaneous.TaskUpdateNotFound, id);
@@ -83,11 +83,11 @@ namespace TaskManager.WebApi.Controllers
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             _logger.LogInformation(Miscellaneous.DeleteTaskRequest, id);
 
-            var success = await _taskService.DeleteTask(id);
+            var success = await _taskService.DeleteTask(id, cancellationToken);
             if (!success)
             {
                 _logger.LogWarning(Miscellaneous.TaskDeleteNotFound, id);

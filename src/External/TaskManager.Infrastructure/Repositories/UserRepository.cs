@@ -14,33 +14,33 @@ namespace TaskManager.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync(CancellationToken cancellationToken)
         {
             return await _context.Users
                 .OrderBy(u => u.Id)
                 .ToListAsync();
         }
 
-        public async Task<User?> GetByIdAsync(int id)
+        public async Task<User?> GetUserByIdAsync(int id, CancellationToken cancellationToken)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users.FindAsync(id, cancellationToken);
         }
 
-        public async Task<User> AddAsync(User user)
+        public async Task<User> AddUserAsync(User user, CancellationToken cancellationToken)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
         }
 
-        public async Task<User?> UpdateAsync(User user)
+        public async Task<User?> UpdateAsync(User user, CancellationToken cancellationToken)
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return user;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null) return false;
@@ -50,7 +50,7 @@ namespace TaskManager.Infrastructure.Repositories
             return true;
         }
 
-        public async Task<User?> GetUserByEmailAsync(string email)
+        public async Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }

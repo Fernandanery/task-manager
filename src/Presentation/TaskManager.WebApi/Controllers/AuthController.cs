@@ -16,9 +16,9 @@ public class AuthController(
 
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequestDto loginDto)
+    public async Task<IActionResult> Login([FromBody] LoginRequestDto loginDto, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByEmailAsync(loginDto.Email);
+        var user = await _userRepository.GetUserByEmailAsync(loginDto.Email, cancellationToken);
 
         if (user == null)
             return Unauthorized(Miscellaneous.InvalidCredentials);
