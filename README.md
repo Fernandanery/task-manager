@@ -24,8 +24,8 @@ Projeto para fins de estudo e explora o uso de **autenticação JWT** e **gerenc
 ## Funcionalidades
 -  Criação, edição e exclusão de tarefas.  
 -  Criação de subtarefas vinculadas.  
--  Atribuição de status e etiquetas personalizadas às tarefas.  
+-  Atribuição de status às tarefas.  
 -  Autenticação e autorização com JWT.  
 -  Registro e gerenciamento de usuários e permissões.  
 -  Logging avançado com Serilog.  
--  Execução de tarefas automáticas com Hangfire (notificações de tarefas pendentes). 
+-  Execução de tarefas automáticas com Hangfire. 
