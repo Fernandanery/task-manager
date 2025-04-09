@@ -54,5 +54,10 @@
 
         // Login
         public const string InvalidCredentials = "Credenciais inválidas.";
+
+        // Hangfire
+        public const string ExecutingRecurringJob = "Executando tarefa recorrente às {Hora}";
+        public const string TaskReminderLog = "Lembrete: Tarefa '{Titulo}' ainda está pendente.";
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using TaskManager.Application.Services;
+using TaskManager.SharedKernel.Constants;
 
 public class TaskReminderJob
 {
@@ -17,7 +18,7 @@ public class TaskReminderJob
         var tarefasPendentes = await _taskService.GetPendingTasksAsync();
         foreach (var tarefa in tarefasPendentes)
         {
-            _logger.LogInformation("Lembrete: Tarefa '{Titulo}' ainda está pendente.", tarefa.Title);
+            _logger.LogInformation(Miscellaneous.TaskReminderLog, tarefa.Title);
         }
     }
 }

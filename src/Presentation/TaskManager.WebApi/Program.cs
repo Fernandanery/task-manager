@@ -19,6 +19,7 @@ using TaskManager.Domain.Entities;
 using TaskManager.Domain.Interfaces;
 using TaskManager.Infrastructure.Persistence;
 using TaskManager.Infrastructure.Repositories;
+using TaskManager.SharedKernel.Constants;
 using TaskManager.WebApi.SwaggerExamples;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,7 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 // Injeção de dependência
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<TaskService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserService>();
 
@@ -175,8 +177,7 @@ if (app.Environment.IsDevelopment())
 }
 
 RecurringJob.AddOrUpdate("tarefa-recorrente",
-    () => Console.WriteLine($"Executando tarefa às {DateTime.Now}"), Cron.Minutely);
-
+    () => Log.Information(Miscellaneous.ExecutingRecurringJob, DateTime.Now), Cron.Minutely);
 
 app.UseHttpsRedirection();
 
