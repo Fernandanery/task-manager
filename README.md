@@ -16,7 +16,6 @@ Projeto para fins de estudo e explora o uso de **autenticação JWT** e **gerenc
 - **ProblemDetails** - Padrão de resposta para erros HTTP	
 - **Serilog** – Para logging estruturado e rastreamento de atividades.  
 - **Hangfire** – Para gerenciamento de tarefas em segundo plano.  
-- **API Versioning** – Para versionamento de endpoints.
 - **Cancellation Token** - Para cancelar requisições assíncronas de maneira controlada
 - **X-unit** - Para testes unitários
 
@@ -29,5 +28,4 @@ Projeto para fins de estudo e explora o uso de **autenticação JWT** e **gerenc
 -  Autenticação e autorização com JWT.  
 -  Registro e gerenciamento de usuários e permissões.  
 -  Logging avançado com Serilog.  
--  Configuração de API Versioning para compatibilidade futura.  
 -  Execução de tarefas automáticas com Hangfire (notificações de tarefas pendentes). 
