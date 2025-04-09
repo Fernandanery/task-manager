@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hangfire;
+using Hangfire.SqlServer;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
@@ -29,7 +30,16 @@ builder.Services.AddHangfire(config =>
     config.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
           .UseSimpleAssemblyNameTypeSerializer()
           .UseRecommendedSerializerSettings()
-          .UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+          .UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+          {
+              CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+              SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+              QueuePollInterval = TimeSpan.Zero,
+              UseRecommendedIsolationLevel = true,
+              DisableGlobalLocks = true
+          }));
+
+builder.Services.AddHangfireServer();
 
 builder.Services.AddHangfireServer();
 
@@ -176,8 +186,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-RecurringJob.AddOrUpdate("tarefa-recorrente",
-    () => Log.Information(Miscellaneous.ExecutingRecurringJob, DateTime.Now), Cron.Minutely);
+// Hangfire jobs
+RecurringJob.AddOrUpdate<TaskReminderJob>(
+    "lembrete-tarefas-pendentes",
+    job => job.EnviarLembretesDeTarefasPendentes(),
+    "0 8 * * *");
 
 app.UseHttpsRedirection();
 

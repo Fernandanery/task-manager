@@ -62,3 +62,27 @@
 2025-04-09 15:56:08.159 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
 2025-04-09 15:57:08.226 -03:00 [INF] Lembrete: Tarefa 'Testar API XPTO' ainda está pendente.
 2025-04-09 15:57:08.229 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-09 16:32:00.147 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-09 16:32:00.833 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-09 16:32:01.683 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-09 16:32:01.684 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-09 16:32:01.685 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-09 16:32:01.754 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-09 16:32:01.755 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-09 16:32:01.756 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-09 16:32:01.807 -03:00 [INF] Server nt0887416mt1580:4028:ea076b8d successfully announced in 52,699 ms
+2025-04-09 16:32:01.810 -03:00 [INF] Server nt0887416mt1580:4028:e3cc7850 successfully announced in 14,209 ms
+2025-04-09 16:32:01.816 -03:00 [INF] Server nt0887416mt1580:4028:ea076b8d is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-09 16:32:01.816 -03:00 [INF] Server nt0887416mt1580:4028:e3cc7850 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-09 16:32:01.860 -03:00 [INF] 1 servers were removed due to timeout
+2025-04-09 16:32:02.524 -03:00 [INF] Server nt0887416mt1580:4028:ea076b8d all the dispatchers started
+2025-04-09 16:32:02.525 -03:00 [INF] Server nt0887416mt1580:4028:e3cc7850 all the dispatchers started
+2025-04-09 16:32:03.080 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
