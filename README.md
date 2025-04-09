@@ -8,7 +8,6 @@ Projeto para fins de estudo e explora o uso de **autenticação JWT** e **gerenc
 - **.NET 9** – Desenvolvimento da API.  
 - **Entity Framework Core** – ORM para manipulação de dados.
 - **SQL Server** (LocalDB) -  Banco para persistência de dados
-- **Dependency Injection** - Injeção de dependência para serviços e repositórios
 - **Swagger e Scalar** - Documentação da API	
 - **FluentValidation** – Para validação de dados de entrada.  
 - **Mapster** – Para mapeamento eficiente de objetos.  
