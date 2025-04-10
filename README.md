@@ -12,7 +12,6 @@ Projeto para fins de estudo e explora o uso de **autenticação JWT** e **gerenc
 - **FluentValidation** – Para validação de dados de entrada.  
 - **Mapster** – Para mapeamento eficiente de objetos.  
 - **JWT (JSON Web Tokens)** – Para autenticação e autorização.
-- **ProblemDetails** - Padrão de resposta para erros HTTP	
 - **Serilog** – Para logging estruturado e rastreamento de atividades.  
 - **Hangfire** – Para gerenciamento de tarefas em segundo plano.  
 - **Cancellation Token** - Para cancelar requisições assíncronas de maneira controlada
