@@ -1,0 +1,107 @@
+2025-04-10 12:20:10.134 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-10 12:20:12.011 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-10 12:20:12.628 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-10 12:20:12.630 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-10 12:20:12.631 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-10 12:20:12.666 -03:00 [INF] Server nt0887416mt1580:4028:6994274d successfully announced in 13,5971 ms
+2025-04-10 12:20:12.672 -03:00 [INF] Server nt0887416mt1580:4028:6994274d is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-10 12:20:12.723 -03:00 [INF] 1 servers were removed due to timeout
+2025-04-10 12:20:12.918 -03:00 [INF] Server nt0887416mt1580:4028:6994274d all the dispatchers started
+2025-04-10 12:20:13.327 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 12:21:13.330 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 12:21:50.974 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-10 12:21:51.456 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-10 12:21:51.995 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-10 12:21:51.996 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-10 12:21:51.997 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-10 12:21:52.023 -03:00 [INF] Server nt0887416mt1580:26644:dff64ae5 successfully announced in 11,4077 ms
+2025-04-10 12:21:52.028 -03:00 [INF] Server nt0887416mt1580:26644:dff64ae5 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-10 12:21:52.353 -03:00 [INF] Server nt0887416mt1580:26644:dff64ae5 all the dispatchers started
+2025-04-10 12:22:07.699 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:24:15.891 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-10 14:24:17.433 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-10 14:24:18.086 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-10 14:24:18.088 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-10 14:24:18.089 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-10 14:24:18.185 -03:00 [INF] Server nt0887416mt1580:26724:c01e0919 successfully announced in 18,9541 ms
+2025-04-10 14:24:18.192 -03:00 [INF] Server nt0887416mt1580:26724:c01e0919 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-10 14:24:18.280 -03:00 [INF] 2 servers were removed due to timeout
+2025-04-10 14:24:18.490 -03:00 [INF] Server nt0887416mt1580:26724:c01e0919 all the dispatchers started
+2025-04-10 14:24:19.221 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:25:04.126 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:26:09.549 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-10 14:26:10.031 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-10 14:26:10.532 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-10 14:26:10.534 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-10 14:26:10.536 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-10 14:26:10.564 -03:00 [INF] Server nt0887416mt1580:18116:1ef84d04 successfully announced in 9,918 ms
+2025-04-10 14:26:10.571 -03:00 [INF] Server nt0887416mt1580:18116:1ef84d04 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-10 14:26:10.843 -03:00 [INF] Server nt0887416mt1580:18116:1ef84d04 all the dispatchers started
+2025-04-10 14:26:11.198 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:27:11.201 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:38:02.977 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-10 14:38:04.380 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-10 14:38:05.089 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-10 14:38:05.091 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-10 14:38:05.091 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-10 14:38:05.148 -03:00 [INF] Server nt0887416mt1580:29528:723d0ae5 successfully announced in 10,0239 ms
+2025-04-10 14:38:05.154 -03:00 [INF] Server nt0887416mt1580:29528:723d0ae5 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-10 14:38:05.288 -03:00 [INF] 2 servers were removed due to timeout
+2025-04-10 14:38:05.529 -03:00 [INF] Server nt0887416mt1580:29528:723d0ae5 all the dispatchers started
+2025-04-10 14:38:06.020 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:39:06.020 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:40:06.092 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:41:06.138 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:41:56.479 -03:00 [INF] Recebida a requisição para buscar todas as tarefas
+2025-04-10 14:42:06.201 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:43:06.246 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:44:06.302 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:45:06.370 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:50:56.899 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-10 14:50:58.441 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-10 14:50:59.078 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-10 14:50:59.081 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-10 14:50:59.081 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-10 14:50:59.187 -03:00 [INF] Server nt0887416mt1580:45288:4f5496ec successfully announced in 42,804 ms
+2025-04-10 14:50:59.194 -03:00 [INF] Server nt0887416mt1580:45288:4f5496ec is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-10 14:50:59.273 -03:00 [INF] 1 servers were removed due to timeout
+2025-04-10 14:50:59.582 -03:00 [INF] Server nt0887416mt1580:45288:4f5496ec all the dispatchers started
+2025-04-10 14:51:00.052 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:51:14.993 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:52:00.041 -03:00 [INF] Executando tarefa recorrente às "2025-04-09T15:44:13.8085614-03:00"
+2025-04-10 14:52:17.499 -03:00 [INF] Start installing Hangfire SQL objects...
+2025-04-10 14:52:18.041 -03:00 [INF] Hangfire SQL objects installed.
+2025-04-10 14:52:18.533 -03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: (localdb)\MSSQLLocalDB@TaskManagerDB'
+2025-04-10 14:52:18.534 -03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2025-04-10 14:52:18.535 -03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-04-10 14:52:18.620 -03:00 [INF] Server nt0887416mt1580:46176:3f1cdc9b successfully announced in 35,0314 ms
+2025-04-10 14:52:18.665 -03:00 [INF] Server nt0887416mt1580:46176:3f1cdc9b is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-04-10 14:52:19.003 -03:00 [INF] Server nt0887416mt1580:46176:3f1cdc9b all the dispatchers started

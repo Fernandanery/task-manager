@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
@@ -20,7 +21,6 @@ using TaskManager.Domain.Entities;
 using TaskManager.Domain.Interfaces;
 using TaskManager.Infrastructure.Persistence;
 using TaskManager.Infrastructure.Repositories;
-using TaskManager.SharedKernel.Constants;
 using TaskManager.WebApi.SwaggerExamples;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,8 +38,6 @@ builder.Services.AddHangfire(config =>
               UseRecommendedIsolationLevel = true,
               DisableGlobalLocks = true
           }));
-
-builder.Services.AddHangfireServer();
 
 builder.Services.AddHangfireServer();
 
@@ -114,7 +112,7 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description =
-                    "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+            "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
@@ -173,6 +171,29 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        app.MapScalarApiReference(options =>
+        {
+            options.Title = "Task Manager API";
+            options.OpenApiRoutePattern = "/swagger/v1/swagger.json";
+        });
+
+        app.Use(async (context, next) =>
+        {
+            if (context.Request.Path == "/")
+            {
+                context.Response.Redirect("/swagger");
+                return;
+            }
+
+            await next();
+        });
+    }
 
     app.Use(async (context, next) =>
     {
