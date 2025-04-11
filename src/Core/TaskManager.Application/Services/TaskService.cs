@@ -18,7 +18,6 @@ namespace TaskManager.Application.Services
 
         public async Task<List<TaskItem>> GetAllTasks(CancellationToken cancellationToken)
         {
-            //await Task.Delay(5000, cancellationToken); // Simula um tempo de processamento de 5 segundos
 
             return await _repository.GetAllTasksAsync(cancellationToken);
         }
