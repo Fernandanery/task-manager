@@ -1,18 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using System.Threading;
 using TaskManager.Application.Services;
 using TaskManager.SharedKernel.Constants;
 
-public class TaskReminderJob
+public class TaskReminderJob(TaskService taskService, ILogger<TaskReminderJob> logger)
 {
-    private readonly TaskService _taskService;
-    private readonly ILogger<TaskReminderJob> _logger;
-
-    public TaskReminderJob(TaskService taskService, ILogger<TaskReminderJob> logger)
-    {
-        _taskService = taskService;
-        _logger = logger;
-    }
+    private readonly TaskService _taskService = taskService;
+    private readonly ILogger<TaskReminderJob> _logger = logger;
 
     public async Task EnviarLembretesDeTarefasPendentes()
     {

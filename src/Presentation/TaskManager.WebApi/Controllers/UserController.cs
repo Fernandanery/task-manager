@@ -10,18 +10,11 @@ namespace TaskManager.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class UserController(UserService userService, IMapper mapper, ILogger<UserController> logger) : ControllerBase
     {
-        private readonly UserService _userService;
-        private readonly IMapper _mapper;
-        private readonly ILogger<UserController> _logger;
-
-        public UserController(UserService userService, IMapper mapper, ILogger<UserController> logger)
-        {
-            _userService = userService;
-            _mapper = mapper;
-            _logger = logger;
-        }
+        private readonly UserService _userService = userService;
+        private readonly IMapper _mapper = mapper;
+        private readonly ILogger<UserController> _logger = logger;
 
         [Authorize]
         [HttpGet]

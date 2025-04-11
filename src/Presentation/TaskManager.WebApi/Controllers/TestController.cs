@@ -7,17 +7,10 @@ namespace TaskManager.WebApi.Controllers;
 [ApiController]
 [ApiExplorerSettings(IgnoreApi = true)]
 [Route("api/[controller]")]
-public class TestController : ControllerBase
+public class TestController(ApplicationDbContext context, ILogger<TestController> logger) : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
-    private readonly ILogger<TestController> _logger;
-
-    public TestController(ApplicationDbContext context, ILogger<TestController> logger)
-    {
-        _context = context;
-        _logger = logger;
-
-    }
+    private readonly ApplicationDbContext _context = context;
+    private readonly ILogger<TestController> _logger = logger;
 
     [HttpGet]
     public IActionResult Get()

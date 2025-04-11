@@ -1,20 +1,13 @@
-﻿using Mapster;
-using TaskManager.Application.DTOs;
+﻿using TaskManager.Application.DTOs;
 using TaskManager.Domain.Entities;
 using TaskManager.Domain.Interfaces;
 
 namespace TaskManager.Application.Services
 {
-    public class TaskService : ITaskService
+    public class TaskService(ITaskRepository repository, IUserRepository userRepository) : ITaskService
     {
-        private readonly ITaskRepository _repository;
-        private readonly IUserRepository _userRepository;
-
-        public TaskService(ITaskRepository repository, IUserRepository userRepository)
-        {
-            _repository = repository;
-            _userRepository = userRepository;
-        }
+        private readonly ITaskRepository _repository = repository;
+        private readonly IUserRepository _userRepository = userRepository;
 
         public async Task<List<TaskItem>> GetAllTasks(CancellationToken cancellationToken)
         {

@@ -5,14 +5,9 @@ using TaskManager.Infrastructure.Persistence;
 
 namespace TaskManager.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(ApplicationDbContext context) : IUserRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public UserRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task<List<User>> GetAllAsync(CancellationToken cancellationToken)
         {

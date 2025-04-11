@@ -6,21 +6,11 @@ using TaskManager.Domain.Interfaces;
 
 namespace TaskManager.Application.Services
 {
-    public class UserService
+    public class UserService(IUserRepository repository, IMapper mapper, IPasswordHasher<User> passwordHasher)
     {
-        private readonly IUserRepository _repository;
-        private readonly IMapper _mapper;
-        private readonly IPasswordHasher<User> _passwordHasher;
-
-
-
-        public UserService(IUserRepository repository, IMapper mapper, IPasswordHasher<User> passwordHasher)
-        {
-            _repository = repository;
-            _mapper = mapper;
-            _passwordHasher = passwordHasher;
-
-        }
+        private readonly IUserRepository _repository = repository;
+        private readonly IMapper _mapper = mapper;
+        private readonly IPasswordHasher<User> _passwordHasher = passwordHasher;
 
         public async Task<List<User>> GetAllUsersAsync(CancellationToken cancellationToken)
         {

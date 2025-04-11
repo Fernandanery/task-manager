@@ -25,7 +25,7 @@ namespace TaskManager.UnitTests.Application.Services
             // Arrange
             var tasks = new List<TaskItem>
             {
-                new TaskItem
+                new() 
                 {
                     Id = 1,
                     Title = "Test Task",

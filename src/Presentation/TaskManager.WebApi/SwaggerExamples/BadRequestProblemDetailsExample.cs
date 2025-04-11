@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using Swashbuckle.AspNetCore.Filters;
 using TaskManager.SharedKernel.Constants;
 
 namespace TaskManager.WebApi.SwaggerExamples;

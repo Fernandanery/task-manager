@@ -28,14 +28,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\TaskManager.Application\TaskManager.Application.csproj" />
-    <ProjectReference Include="..\..\External\TaskManager.Configuration\TaskManager.Configuration.csproj" />
     <ProjectReference Include="..\..\External\TaskManager.Infrastructure\TaskManager.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Core\TaskManager.Domain\TaskManager.Domain.csproj" />
     <ProjectReference Include="..\..\Core\TaskManager.SharedKernel\TaskManager.SharedKernel.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\" />
   </ItemGroup>
 
 </Project>

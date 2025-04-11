@@ -31,7 +31,7 @@ namespace TaskManager.UnitTests.Application.Services
         [Fact]
         public async Task GetAllUsersAsync_ReturnsUsers()
         {
-            var users = new List<User> { new User { Id = 1, Name = "Fernanda", Email = "fernanda@test.com", Password = "123" } };
+            var users = new List<User> { new() { Id = 1, Name = "Fernanda", Email = "fernanda@test.com", Password = "123" } };
             _userRepositoryMock.Setup(repo => repo.GetAllAsync(It.IsAny<CancellationToken>())).ReturnsAsync(users);
 
             var result = await _userService.GetAllUsersAsync(CancellationToken.None);

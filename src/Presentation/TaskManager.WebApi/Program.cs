@@ -172,28 +172,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    if (app.Environment.IsDevelopment())
+    app.MapScalarApiReference(options =>
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-
-        app.MapScalarApiReference(options =>
-        {
-            options.Title = "Task Manager API";
-            options.OpenApiRoutePattern = "/swagger/v1/swagger.json";
-        });
-
-        app.Use(async (context, next) =>
-        {
-            if (context.Request.Path == "/")
-            {
-                context.Response.Redirect("/swagger");
-                return;
-            }
-
-            await next();
-        });
-    }
+        options.Title = "Task Manager API";
+        options.OpenApiRoutePattern = "/swagger/v1/swagger.json";
+    });
 
     app.Use(async (context, next) =>
     {
